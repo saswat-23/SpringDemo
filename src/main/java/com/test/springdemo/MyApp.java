@@ -1,9 +1,11 @@
 package com.test.springdemo;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.test.springdemo.coach.ICoach;
 
+@ComponentScan
 public class MyApp {
 
 	public static void main(String[] args) {
@@ -13,11 +15,11 @@ public class MyApp {
 		
 		
 		// Use the Spring XML Config. approach
-		useSpringXmlConfig();
+//		useSpringXmlConfig();
 		
 		
 		// Use the Spring Java Config. approach
-//		useSpringJavaConfig();
+		useSpringJavaConfig();
 
 	}
 	
@@ -78,7 +80,30 @@ public class MyApp {
 		
 //		Spring Object Creation - Java Configuration
 //		==========================================
+		// 1. Create Spring Context
+		ClassPathXmlApplicationContext context = 
+				new ClassPathXmlApplicationContext("applicationContextJavaConfig.xml");
 		
+		// 2. Get the required bean from the Spring context
+		ICoach coach = context.getBean(ICoach.class);
+		
+		// 3. Perform the required operation on the bean
+		coach.getDailyWorkout();
+		System.out.println("For "+coach.getWorkoutDuration()+" mins");
+		coach.getDailyFortune();
+		coach.showCoachInfo();
+		System.out.println("coach hash#: "+coach.hashCode());
+		
+		System.out.println("\n\n");
+		// Create another coach object from the same context
+		ICoach coach2 = context.getBean(ICoach.class);
+		System.out.println("coach2 hash#: "+coach2.hashCode());
+		
+		// Compare the hash of both the coach objects.
+		System.out.println("coach == coach2? => "+coach.equals(coach2));
+		
+		// 4. Close the Spring Context
+		context.close();
 		
 	}
 	

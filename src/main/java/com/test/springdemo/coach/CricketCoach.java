@@ -1,7 +1,11 @@
 package com.test.springdemo.coach;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.test.springdemo.fortune.IFortuneService;
 
+@Component
 public class CricketCoach implements ICoach {
 
 	IFortuneService fortuneService;
@@ -27,6 +31,7 @@ public class CricketCoach implements ICoach {
 		fortuneService.getDailyFortune();
 	}
 	
+	@Autowired
 	public void setFortuneService(IFortuneService fortuneService) {
 		this.fortuneService = fortuneService;
 	}
