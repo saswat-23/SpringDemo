@@ -1,0 +1,52 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context = "http://www.springframework.org/schema/context"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- CONSTRUCTOR INJECTION-->
+   	<!--bean id = "coach1" class = "com.test.springdemo.coach.FootballCoach">
+   		<constructor-arg ref="sadFortuneService"></constructor-arg>
+   	</bean-->
+   
+   	<!-- SETTER INJECTION - Injecting Dependent Object -->
+   	<!-- SETTER INJECTION - Injecting Literal Values -->
+   	<!--bean id = "coach1" class = "com.test.springdemo.coach.CricketCoach">
+   		<property name="fortuneService" ref="sadFortuneService"></property>
+   		<property name="name" value="Saswat Mohanty"></property>
+   		<property name="emailId" value="saswat23@gmail.com"></property>
+   		<property name="contact" value="9908807701"></property>
+   		<property name="age" value="55"></property>
+   	</bean-->
+
+
+	<!-- SETTER INJECTION - Injecting values from Properties File -->
+	<context:property-placeholder location="classpath:circketCoachInfo.properties" order="2"/>
+	<context:property-placeholder location="classpath:FootballCoachInfo.properties" order="11"/>
+	
+   	<!--bean id = "myCoach" class = "com.test.springdemo.coach.CricketCoach" >
+   		<property name="fortuneService" ref="sadFortuneService"></property>
+   		<property name="name" value="${coach.info.name}"></property>
+   		<property name="emailId" value="${coach.info.email}"></property>
+   		<property name="contact" value="${coach.info.phoneNo}"></property>
+   		<property name="age" value="${coach.info.age}"></property>
+   	</bean-->
+
+	<!-- Spring Bean with scope=prototype -->
+	<bean id = "myCoach" class = "com.test.springdemo.coach.CricketCoach" 
+	init-method="doInit" destroy-method="doDestroy">
+   		<property name="fortuneService" ref="sadFortuneService"></property>
+   		<property name="name" value="${coach.info.name}"></property>
+   		<property name="emailId" value="${coach.info.email}"></property>
+   		<property name="contact" value="${coach.info.phoneNo}"></property>
+   		<property name="age" value="${coach.info.age}"></property>
+   	</bean>
+
+	<bean id="happyFortuneService" class="com.test.springdemo.fortune.HappyFortuneService"></bean>
+	<bean id="sadFortuneService" class="com.test.springdemo.fortune.SadFortuneService"></bean>
+
+</beans>
