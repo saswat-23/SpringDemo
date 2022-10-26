@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.test.springdemo.fortune.IFortuneService;
 
-@Component
+@Component("myCoach")
 public class CricketCoach implements ICoach {
 
 	IFortuneService fortuneService;

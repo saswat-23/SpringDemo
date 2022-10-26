@@ -1,7 +1,10 @@
 package com.test.springdemo.coach;
 
+import org.springframework.stereotype.Component;
+
 import com.test.springdemo.fortune.IFortuneService;
 
+@Component("footballCoach")
 public class FootballCoach implements ICoach {
 
 IFortuneService fortuneService;

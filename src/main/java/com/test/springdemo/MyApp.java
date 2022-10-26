@@ -85,7 +85,7 @@ public class MyApp {
 				new ClassPathXmlApplicationContext("applicationContextJavaConfig.xml");
 		
 		// 2. Get the required bean from the Spring context
-		ICoach coach = context.getBean(ICoach.class);
+		ICoach coach = context.getBean("myCoach",ICoach.class);
 		
 		// 3. Perform the required operation on the bean
 		coach.getDailyWorkout();
@@ -96,7 +96,8 @@ public class MyApp {
 		
 		System.out.println("\n\n");
 		// Create another coach object from the same context
-		ICoach coach2 = context.getBean(ICoach.class);
+		ICoach coach2 = context.getBean("footballCoach",ICoach.class);
+		coach2.getDailyWorkout();
 		System.out.println("coach2 hash#: "+coach2.hashCode());
 		
 		// Compare the hash of both the coach objects.
